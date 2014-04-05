@@ -26,6 +26,9 @@
 *.order
 *.symvers
 *.mod.*
+.*.o.cmd
+.*.ko.cmd
+*.mod
 
 # Misc
 *~
