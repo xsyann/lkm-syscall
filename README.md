@@ -5,34 +5,39 @@ Linux Loadable Kernel Module system call hijacking
 
 
     > ./run.sh foobar
-     ------------------------------
-    |  Load Kernel Module syscall  |
-     ------------------------------
+    ┌──────────────────────────────┐
+    │  Load Kernel Module syscall  │
+    └──────────────────────────────┘
+    # insmod syscall.ko
 
-     ------------------------------
-    |           lsmod              |
-     ------------------------------
+    ┌──────────────────────────────┐
+    │           lsmod              │
+    └──────────────────────────────┘
+    $ lsmod | grep 'syscall'
     syscall                12658  0 
 
-     ------------------------------
-    |           Test               |
-     ------------------------------
+    ┌──────────────────────────────┐
+    │           Test               │
+    └──────────────────────────────┘
+    $ ./test 
     Call syscall at offset 184
     Syscall return 0
 
-     ------------------------------
-    | Unload Kernel Module syscall |
-     ------------------------------
+    ┌──────────────────────────────┐
+    │ Unload Kernel Module syscall │
+    └──────────────────────────────┘
+    # rmmod syscall
 
-     ------------------------------
-    |           dmesg              |
-     ------------------------------
-    [35468.433211] Custom syscall loaded
-    [35468.433215] Syscall table address : ffffffff81801420
-    [35468.433256] Syscall at offset 184 : ffffffff810885f0
-    [35468.433258] Custom syscall address ffffffffa0111000
-    [35468.433259] Syscall hijacked
-    [35468.433260] Syscall at offset 184 : ffffffffa0111000
-    [35468.444576] LKM Syscall : foobar
-    [35468.466679] Syscall at offset 184 : ffffffff810885f0
-    [35468.466682] Custom syscall unloaded
+    ┌──────────────────────────────┐
+    │           dmesg              │
+    └──────────────────────────────┘
+    $ dmesg
+    [37894.803863] Custom syscall loaded
+    [37894.803870] Syscall table address : ffffffff81801420
+    [37894.803899] Syscall at offset 184 : ffffffff810885f0
+    [37894.803922] Custom syscall address ffffffffa0111000
+    [37894.803924] Syscall hijacked
+    [37894.803925] Syscall at offset 184 : ffffffffa0111000
+    [37894.824530] LKM Syscall : Foo
+    [37894.837080] Syscall at offset 184 : ffffffff810885f0
+    [37894.837083] Custom syscall unloaded
