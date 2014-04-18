@@ -1,21 +1,21 @@
 ##
 ## Makefile for lkm-syscall
-## 
+##
 ## Made by xsyann
 ## Contact <contact@xsyann.com>
-## 
+##
 ## Started on  Wed Mar 26 13:48:49 2014 xsyann
-## Last update Fri Mar 28 15:01:37 2014 xsyann
+## Last update Fri Apr 18 22:13:17 2014 xsyann
 ##
 
-TARGET 	= test
+TARGET	= test
 SRC	= test.c
 OBJ	= $(SRC:.c=.o)
 CC	= gcc
-CFLAGS += -W -Wall
+CFLAGS	+= -W -Wall
 RM	= rm -vf
 
-$(TARGET) : $(OBJ)
+$(TARGET): $(OBJ)
 	$(CC) $^ -o $@ $(LDFLAGS)
 
 all	: $(TARGET)
@@ -28,4 +28,4 @@ fclean	: clean
 
 re	: fclean all clean
 
-.PHONY: clean fclean re
+.PHONY	: clean fclean re
